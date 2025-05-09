@@ -4,7 +4,7 @@
 		<title>three.js webgl - multiple elements</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="main.css">
+		<link type="text/css" rel="stylesheet" href="style.css">
 		<style>
 			* {
 				box-sizing: border-box;
@@ -100,7 +100,23 @@
 
 				const content = document.getElementById( 'content' );
 
-				for ( let i = 0; i < 40; i ++ ) {
+
+				const maps = [];
+			    const opona1 = new THREE.TextureLoader().load('./images/opona/opona1.jpg');
+                const opona2 = new THREE.TextureLoader().load('./images/opona/opona2.jpg');
+                const opona3 = new THREE.TextureLoader().load('./images/opona/opona3.jpg');
+				const opona4 = new THREE.TextureLoader().load('./images/opona/opona4.jpg');
+				const opona5 = new THREE.TextureLoader().load('./images/opona/opona5.jpg');
+				const opona6 = new THREE.TextureLoader().load('./images/opona/opona6.jpg');
+				const opona7 = new THREE.TextureLoader().load('./images/opona/opona7.jpg');
+				const opona8 = new THREE.TextureLoader().load('./images/opona/opona8.jpg');
+				const opona9 = new THREE.TextureLoader().load('./images/opona/opona9.jpg');
+				const opona10 = new THREE.TextureLoader().load('./images/opona/opona10.jpg');
+				const opona11 = new THREE.TextureLoader().load('./images/opona/opona11.jpg');
+			    maps.push(opona1,opona2,opona3,opona4,opona5,opona6,opona7,opona8,opona9,opona10,opona11);
+
+
+				for ( let i = 0; i < 11; i ++ ) {
 
 					const scene = new THREE.Scene();
 
@@ -140,13 +156,8 @@
 						flatShading: true
 
 					} );*/
-
-
-                    const opona1 = new THREE.TextureLoader().load('./images/opona/opona1.jpg');
-                    const opona2 = new THREE.TextureLoader().load('./images/opona/opona2.jpg');
-                    const opona3 = new THREE.TextureLoader().load('./images/opona/opona3.jpg');
                     
-                    const material = new THREE.MeshBasicMaterial({map: opona3});
+                    const material = new THREE.MeshBasicMaterial({map: maps[i]});
                     material.side=THREE.BackSide;
 
 
@@ -199,7 +210,7 @@
 				scenes.forEach( function ( scene ) {
 
 					// so something moves
-					scene.children[ 0 ].rotation.y = Date.now() * 0.001;
+					//scene.children[ 0 ].rotation.y = Date.now() * 0.001;
 
 					// get the element that is a place holder for where we want to
 					// draw the scene
