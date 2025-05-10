@@ -46,7 +46,7 @@
 				box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.25);
 				margin-left: auto;
                 margin-right: auto;
-				display: block;
+				display: none;
 			}
 
 			.list-item > div:nth-child(1) {
@@ -68,6 +68,11 @@
 				margin-left: auto;
                 margin-right: auto;
 			}
+
+			.list-item.displaySlide{
+				display:block;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -75,9 +80,11 @@
 		<canvas id="c"></canvas>
 
 		<div id="content">
-			<div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - multiple elements - webgl</div>
-		
-
+			<!--<div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - multiple elements - webgl</div>-->
+		<div style="margin:auto; text-align:center;">
+		       <button id="prev" onclick="prevSlide()">&#10094</button>
+               <button id="next" onclick="nextSlide()">&#10095</button>
+		</div>
 		<script type="importmap">
 			{
 				"imports": {
@@ -136,6 +143,7 @@
 					// make a list item
 					const element = document.createElement( 'div' );
 					element.className = 'list-item';
+					element.id = i;
 
 					const sceneElement = document.createElement( 'div' );
 					element.appendChild( sceneElement );
@@ -143,6 +151,24 @@
 					const descriptionElement = document.createElement( 'div' );
 					descriptionElement.innerText = 'Scene ' + ( i + 1 );
 					element.appendChild( descriptionElement );
+
+
+/*
+                    const button1 = document.createElement( 'div' );
+					button1.class = 'prev';
+					button1.innerText = '<';
+					button1.onclick='prevSlide()';
+					element.appendChild( button1 );
+
+					const button2 = document.createElement( 'div' );
+					button2.class = 'next';
+					button2.innerText = '>';
+					button2.onclick='nextSlide()';
+					element.appendChild( button2 );
+
+*/
+
+
 
 					// the element that represents the area we want to render the scene
 					scene.userData.element = sceneElement;
@@ -188,13 +214,12 @@
 
 				}
 
-
 				renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true } );
 				renderer.setClearColor( 0xffffff, 1 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setAnimationLoop( animate );
 
-			}
+			}	
 
 			function updateSize() {
 
@@ -261,12 +286,49 @@
 					renderer.render( scene, camera );
 
 				} );
+			}
+		//slider code
+			const slides=document.querySelectorAll(".list-item");
+			let slideIndex=0;
+			let itervalId=null;
 
+			document.addEventListener("DOMContentLoaded", initalizeSlider);
+
+			function initalizeSlider(){
+				if(slides.length>0){
+					slides[slideIndex].classList.add("displaySlide");
+				    //intervalId=setInterval(nextSlide, 3000);
+				}
 			}
 
-		
+			function showSlide(index){
+
+				if(index>=slides.length){
+					slideIndex=0;
+				}
+				else if(index<0){
+					slideIndex=slides.length-1;
+				}
+
+				slides.forEach(slide => {
+					slide.classList.remove("displaySlide");
+				});
+				slides[slideIndex].classList.add("displaySlide");
+			}
+
+			function prevSlide(){
+				slideIndex--;
+				showSlide(slideIndex);
+			}
+
+			function nextSlide(){
+				slideIndex++;
+				showSlide(slideIndex);
+			}
+
+		document.getElementById("next").addEventListener("click", nextSlide);
+		document.getElementById("prev").addEventListener("click", prevSlide);
 		</script>
 		</div>
-
 	</body>
 </html>
