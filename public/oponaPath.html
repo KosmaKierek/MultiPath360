@@ -3,7 +3,7 @@
 	<head>
 		<title>three.js webgl - multiple elements</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1">
 		<link type="text/css" rel="stylesheet" href="style.css">
 		<style>
 			* {
@@ -12,7 +12,7 @@
 			}
 
 			body {
-				background-color: #fff;
+				background-color: #444;
 				color: #444;
 			}
 
@@ -51,22 +51,24 @@
 
 			.list-item > div:nth-child(1) {
 				/*width: 800px;*/
-				height: 800px;
-				width: 1200px;
+				height: 700px;
+				width: 1400px;
 				margin-left: auto;
                 margin-right: auto;
 				display: block;
 			}
 
 			.list-item > div:nth-child(2) {
-				color: #888;
-				font-family: sans-serif;
+				/*color: #444;*/
+				font-family: serif;
 				font-size: large;
 				/*width: 800px;*/
 				margin-top: 0.5em;
-				width: 1000px;
+				/*width: 1000px;
 				margin-left: auto;
                 margin-right: auto;
+				display: block;*/
+				text-align: center;
 			}
 
 			.list-item.displaySlide{
@@ -79,11 +81,9 @@
 
 		<canvas id="c"></canvas>
 
-		<div id="content">
-			<!--<div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - multiple elements - webgl</div>-->
-		<div style="margin:auto; text-align:center;">
-		       <button id="prev" onclick="prevSlide()">&#10094</button>
-               <button id="next" onclick="nextSlide()">&#10095</button>
+		<div id="content" style="margin:auto; text-align:center;" class="slider">
+		       <button id="prev" onclick="prevSlide()" class="left">&#10094</button>
+               <button id="next" onclick="nextSlide()" class="right">&#10095</button>
 		</div>
 		<script type="importmap">
 			{
@@ -126,17 +126,17 @@
                 const opona2 = new THREE.TextureLoader().load('./images/opona/opona2.jpg');
                 const opona3 = new THREE.TextureLoader().load('./images/opona/opona3.jpg');
 				const opona4 = new THREE.TextureLoader().load('./images/opona/opona4.jpg');
-				const opona5 = new THREE.TextureLoader().load('./images/opona/opona5.jpg');
+				//const opona5 = new THREE.TextureLoader().load('./images/opona/opona5.jpg');
 				const opona6 = new THREE.TextureLoader().load('./images/opona/opona6.jpg');
 				const opona7 = new THREE.TextureLoader().load('./images/opona/opona7.jpg');
 				const opona8 = new THREE.TextureLoader().load('./images/opona/opona8.jpg');
 				const opona9 = new THREE.TextureLoader().load('./images/opona/opona9.jpg');
 				const opona10 = new THREE.TextureLoader().load('./images/opona/opona10.jpg');
 				const opona11 = new THREE.TextureLoader().load('./images/opona/opona11.jpg');
-			    maps.push(opona1,opona2,opona3,opona4,opona5,opona6,opona7,opona8,opona9,opona10,opona11);
+			    maps.push(opona1,opona2,opona3,opona4,opona6,opona7,opona8,opona9,opona10,opona11);
 
 
-				for ( let i = 0; i < 11; i ++ ) {
+				for ( let i = 0; i < 10; i ++ ) {
 
 					const scene = new THREE.Scene();
 
@@ -149,7 +149,7 @@
 					element.appendChild( sceneElement );
 
 					const descriptionElement = document.createElement( 'div' );
-					descriptionElement.innerText = 'Scene ' + ( i + 1 );
+					descriptionElement.innerText = 'WIDOK NA OPONĘ';
 					element.appendChild( descriptionElement );
 
 
@@ -174,13 +174,13 @@
 					scene.userData.element = sceneElement;
 					content.appendChild( element );
 
-					const camera = new THREE.PerspectiveCamera( 50, 1, 1, 10 );
+					const camera = new THREE.PerspectiveCamera( 35, 1, 1, 10 );
 					camera.position.z = 1;
 					scene.userData.camera = camera;
 
 					const controls = new OrbitControls( scene.userData.camera, scene.userData.element );
 					controls.minDistance = 0.2;
-					controls.maxDistance = 1;
+					controls.maxDistance = 1.9;
 					controls.mouseButtons.RIGHT = THREE.MOUSE.ROTATE;
                     controls.enablePan = false;
 					//controls.enablePan = false;
@@ -204,11 +204,11 @@
 
 					scene.add( new THREE.Mesh( geometry, material ) );
 
-					scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444, 3 ) );
+					/*scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444, 3 ) );
 
 					const light = new THREE.DirectionalLight( 0xffffff, 1.5 );
 					light.position.set( 1, 1, 1 );
-					scene.add( light );
+					scene.add( light );*/
 
 					scenes.push( scene );
 
@@ -289,14 +289,14 @@
 			}
 		//slider code
 			const slides=document.querySelectorAll(".list-item");
-			let slideIndex=0;
+			let slideId=0;
 			let itervalId=null;
 
 			document.addEventListener("DOMContentLoaded", initalizeSlider);
 
 			function initalizeSlider(){
 				if(slides.length>0){
-					slides[slideIndex].classList.add("displaySlide");
+					slides[slideId].classList.add("displaySlide");
 				    //intervalId=setInterval(nextSlide, 3000);
 				}
 			}
@@ -304,26 +304,26 @@
 			function showSlide(index){
 
 				if(index>=slides.length){
-					slideIndex=0;
+					slideId=0;
 				}
 				else if(index<0){
-					slideIndex=slides.length-1;
+					slideId=slides.length-1;
 				}
 
 				slides.forEach(slide => {
 					slide.classList.remove("displaySlide");
 				});
-				slides[slideIndex].classList.add("displaySlide");
+				slides[slideId].classList.add("displaySlide");
 			}
 
 			function prevSlide(){
-				slideIndex--;
-				showSlide(slideIndex);
+				slideId--;
+				showSlide(slideId);
 			}
 
 			function nextSlide(){
-				slideIndex++;
-				showSlide(slideIndex);
+				slideId++;
+				showSlide(slideId);
 			}
 
 		document.getElementById("next").addEventListener("click", nextSlide);
