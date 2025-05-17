@@ -3,7 +3,7 @@
 	<head>
 		<title>three.js webgl - multiple elements</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="style.css">
 		<style>
 			* {
@@ -58,33 +58,65 @@
 				display: block;
 			}
 
-			.list-item > div:nth-child(2) {
-				/*color: #444;*/
-				font-family: serif;
+			.opis{
+				color: #444;
+				font-family: Palatino, URW Palladio L, serif;
 				font-size: large;
-				/*width: 800px;*/
-				margin-top: 0.5em;
-				/*width: 1000px;
+				width: 800px;
+				margin-bottom: 1em;
 				margin-left: auto;
                 margin-right: auto;
-				display: block;*/
+				display: block;
 				text-align: center;
+				border: 1px solid rgb(255, 255, 255);
+				border-radius: 10px;
+				padding: 10px 10px;
+				background-color: rgb(241, 241, 241);
+				color: rgb(145, 145, 145);
 			}
+
+			/*.list-item > div:nth-child(2) {
+				color: #444;
+				font-family: Palatino, URW Palladio L, serif;
+				font-size: large;
+				width: 800px;
+				margin-top: 1em;
+				margin-bottom: 1em;
+				width: 1000px;
+				margin-left: auto;
+                margin-right: auto;
+				display: block;
+				text-align: center;
+				border: 1px solid rgb(255, 255, 255);
+				border-radius: 10px;
+				padding: 10px 10px;
+				background-color: rgb(241, 241, 241);
+				color: rgb(145, 145, 145);
+			}*/
 
 			.list-item.displaySlide{
 				display:block;
-				box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.25);
+				/*box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.25);*/
 			}
-
 		</style>
 	</head>
 	<body>
-
 		<canvas id="c"></canvas>
 
 		<div id="content" style="margin:auto; text-align:center;" class="slider">
+			<div class="back">
+				<a href="glowna.html">&#10094 POWRÓT NA STRONĘ GŁÓWNĄ</a>
+			</div>
+			<!--<div class="define">
+				Opona lub opona to element w kształcie pierścienia otaczający felgę,<br>
+				który przenosi obciążenie pojazdu z osi przez koło na podłoże i zapewnia przyczepność na powierzchni,<br>
+				po której porusza się koło.
+			</div>-->
 		       <button id="prev" onclick="prevSlide()" class="left">&#10094</button>
                <button id="next" onclick="nextSlide()" class="right">&#10095</button>
+			<div class="opis">
+				WIDOK NA OPONĘ
+			</div>
 		</div>
 		<script type="importmap">
 			{
@@ -113,10 +145,7 @@
 				canvas = document.getElementById( 'c' );
 
 				const geometries = [
-					//new THREE.BoxGeometry( 1, 1, 1 ),
 					new THREE.SphereGeometry( 1, 256, 128 ),
-					//new THREE.DodecahedronGeometry( 0.5 ),
-					//new THREE.CylinderGeometry( 0.5, 0.5, 1, 12 )
 				];
 
 				const content = document.getElementById( 'content' );
@@ -141,7 +170,6 @@
 
 					const scene = new THREE.Scene();
 
-					// make a list item
 					const element = document.createElement( 'div' );
 					element.className = 'list-item';
 					element.id = i;
@@ -149,29 +177,10 @@
 					const sceneElement = document.createElement( 'div' );
 					element.appendChild( sceneElement );
 
-					const descriptionElement = document.createElement( 'div' );
-					descriptionElement.innerText = 'WIDOK NA OPONĘ';
-					element.appendChild( descriptionElement );
+					//const descriptionElement = document.createElement( 'div' );
+					//descriptionElement.innerText = 'WIDOK NA OPONĘ';
+					//element.appendChild( descriptionElement );
 
-
-/*
-                    const button1 = document.createElement( 'div' );
-					button1.class = 'prev';
-					button1.innerText = '<';
-					button1.onclick='prevSlide()';
-					element.appendChild( button1 );
-
-					const button2 = document.createElement( 'div' );
-					button2.class = 'next';
-					button2.innerText = '>';
-					button2.onclick='nextSlide()';
-					element.appendChild( button2 );
-
-*/
-
-
-
-					// the element that represents the area we want to render the scene
 					scene.userData.element = sceneElement;
 					content.appendChild( element );
 
@@ -188,16 +197,8 @@
 					//controls.enableZoom = false;
 					scene.userData.controls = controls;
 
-					// add one random mesh to each scene
+					// add mesh to each scene
 					const geometry = geometries[ geometries.length * Math.random() | 0 ];
-
-					/*const material = new THREE.MeshStandardMaterial( {
-						color: new THREE.Color().setHSL( Math.random(), 1, 0.75, THREE.SRGBColorSpace ),
-						roughness: 0.5,
-						metalness: 0,
-						flatShading: true
-
-					} );*/
                     
                     const material = new THREE.MeshBasicMaterial({map: maps[i]});
                     material.side=THREE.BackSide;
@@ -219,7 +220,6 @@
 				renderer.setClearColor( 0xffffff, 1 );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setAnimationLoop( animate );
-
 			}	
 
 			function updateSize() {
@@ -250,25 +250,18 @@
 
 				scenes.forEach( function ( scene ) {
 
-					// so something moves
-					//scene.children[ 0 ].rotation.y = Date.now() * 0.001;
-
-					// get the element that is a place holder for where we want to
-					// draw the scene
 					const element = scene.userData.element;
 
-					// get its position relative to the page's viewport
 					const rect = element.getBoundingClientRect();
 
-					// check if it's offscreen. If so skip it
 					if ( rect.bottom < 0 || rect.top > renderer.domElement.clientHeight ||
 						 rect.right < 0 || rect.left > renderer.domElement.clientWidth ) {
 
-						return; // it's off screen
+						return;
 
 					}
 
-					// set the viewport
+					//viewport
 					const width = rect.right - rect.left;
 					const height = rect.bottom - rect.top;
 					const left = rect.left;
@@ -279,15 +272,19 @@
 
 					const camera = scene.userData.camera;
 
-					//camera.aspect = width / height; // not changing in this example
-					//camera.updateProjectionMatrix();
-
-					//scene.userData.controls.update();
-
 					renderer.render( scene, camera );
 
 				} );
 			}
+
+			const windowResize = ()=>{
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    renderer.render(scene, camera);
+            }
+            window.addEventListener('resize', windowResize, false);
+
 		//slider code
 			const slides=document.querySelectorAll(".list-item");
 			let slideId=0;
@@ -298,7 +295,6 @@
 			function initalizeSlider(){
 				if(slides.length>0){
 					slides[slideId].classList.add("displaySlide");
-				    //intervalId=setInterval(nextSlide, 3000);
 				}
 			}
 

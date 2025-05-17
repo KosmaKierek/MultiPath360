@@ -34,7 +34,7 @@ button {
 	-ms-user-select: none;
 	user-select: none;
 	pointer-events: none;
-	z-index: 1; /* TODO Solve this in HTML */
+	z-index: 1;
 }
 
 a, button, input, select {
@@ -42,7 +42,7 @@ a, button, input, select {
 }
 
 .lil-gui {
-	z-index: 2 !important; /* TODO Solve this in HTML */
+	z-index: 2 !important;
 }
 
 @media all and ( max-width: 640px ) {
@@ -111,3 +111,46 @@ a, button, input, select {
     right: 0;
 }
 
+.left:hover, .left:active {
+  background-color: rgb(57, 54, 54);
+}
+
+.right:hover, .right:active {
+  background-color: rgb(57, 54, 54);
+}
+
+.back{
+	margin-left: 20px;
+	text-align: left;
+	font-family: serif;
+	text-decoration: underline;
+	/*float:left;*/
+}
+
+/*.define{
+	overflow: hidden;
+	font-family: serif;
+	background-color: #dbd9d9;
+  color: rgb(69, 66, 66);
+  padding: 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  border: solid gold;
+}*/
+
+a:link, a:visited {
+  background-color: #ffffff;
+  color: rgb(167, 163, 163);
+  padding: 2px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+a:hover, a:active {
+  background-color: rgb(57, 54, 54);
+  color: rgb(220, 217, 217);
+}
