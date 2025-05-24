@@ -1,0 +1,62 @@
+body{
+    margin: 0px;
+    font-family: Palatino, URW Palladio L, serif;
+}
+
+main{
+
+    margin-left: 20px;
+
+    margin-right: 20px;
+
+}
+
+h1{
+
+    text-align: center;
+
+}
+
+.topnav {
+  position: relative;
+  overflow: hidden;
+  background-color: #333;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #f0eded;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #010906;
+  color: white;
+}
+
+/* Responsive navigation menu (for mobile devices) */
+@media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+}
+
+.cent{
+  margin: auto;
+  /*width: 50%;*/
+  border: 3px solid rgb(189, 187, 187);
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+}
