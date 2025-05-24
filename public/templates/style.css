@@ -56,7 +56,24 @@ h1{
   margin: auto;
   /*width: 50%;*/
   border: 3px solid rgb(189, 187, 187);
+  border-radius: 10px;
   margin-left: 20px;
   margin-right: 20px;
+  padding: 20px;
+}
+
+fieldset {
+    border: 1px solid #000;
+}
+
+.cent h2{
   text-align: center;
+  background-color: #e4e4e4;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
