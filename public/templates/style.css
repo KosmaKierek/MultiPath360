@@ -3,35 +3,25 @@ body{
     font-family: Palatino, URW Palladio L, serif;
 }
 
-main{
-
-    margin-left: 20px;
-
-    margin-right: 20px;
-
-}
-
 h1{
-
     text-align: center;
-
 }
 
 .topnav {
-  position: relative;
-  overflow: hidden;
-  background-color: #333;
   margin-left: 20px;
   margin-right: 20px;
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
 }
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
   font-size: 17px;
+  color: #f2f2f2;
+  text-decoration: none;
+  padding: 14px 16px;
 }
 
 .topnav a:hover {
@@ -44,7 +34,7 @@ h1{
   color: white;
 }
 
-/* Responsive navigation menu (for mobile devices) */
+/* mobile */
 @media screen and (max-width: 600px) {
   .topnav a, .topnav-right {
     float: none;
