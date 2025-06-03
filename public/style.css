@@ -57,21 +57,7 @@ body {
 	text-align: left;
 	font-family: serif;
 	text-decoration: underline;
-	/*float:left;*/
 }
-
-/*.define{
-	overflow: hidden;
-	font-family: serif;
-	background-color: #dbd9d9;
-  color: rgb(69, 66, 66);
-  padding: 4px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 10px;
-  border: solid gold;
-}*/
 
 a:link, a:visited {
   background-color: #ffffff;
@@ -119,7 +105,6 @@ a {
 
 .list-item {
 	margin: 1em;
-	/*padding: 1em;*/
 	margin-left: auto;
     margin-right: auto;
 	display: none;
