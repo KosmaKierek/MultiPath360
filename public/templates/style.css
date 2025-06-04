@@ -54,16 +54,9 @@ h1{
   background-color: #f9f9f9;
 }
 
-.incent{
-  float: left;
-  position: relative;
-  left: 50%;
-}
-
 .incent2{
   float: left;
   position: relative;
-  left: -50%;
   font-size: large;
   font-family: Trebuchet MS, sans-serif;
   margin-left: 100px;
