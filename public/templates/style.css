@@ -59,9 +59,9 @@ h1{
   position: relative;
   font-size: large;
   font-family: Trebuchet MS, sans-serif;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 60px;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 1em;
 }
 
 fieldset {
