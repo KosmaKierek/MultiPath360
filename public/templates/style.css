@@ -55,13 +55,13 @@ h1{
 }
 
 .incent2{
-  float: left;
+  float: center
+  text-align: left;
   position: relative;
   font-size: large;
   font-family: Trebuchet MS, sans-serif;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-bottom: 1em;
+  margin: auto;
+  width: 50%;
 }
 
 fieldset {
