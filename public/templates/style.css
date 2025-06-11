@@ -67,6 +67,9 @@ h1{
 fieldset {
     border: 1px solid #000;
     background-color: #ffffff;
+    min-width: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .cent h3{
